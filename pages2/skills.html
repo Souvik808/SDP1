@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Skills | Souvik Khilari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-100px) translateX(50px) rotate(90deg); }
+            50% { transform: translateY(-50px) translateX(-50px) rotate(180deg); }
+            75% { transform: translateY(-150px) translateX(100px) rotate(270deg); }
+        }
+
+        /* Header */
+        .sub-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 8rem 2rem 3rem;
+            overflow: hidden;
+        }
+
+        .sub-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(240, 147, 251, 0.3), transparent);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .sub-header h1 {
+            position: relative;
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideUp 0.8s ease;
+            letter-spacing: 2px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sub-header p {
+            position: relative;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            animation: fadeIn 1s ease 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Skills Section */
+        .skills-section {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 2rem 6rem;
+        }
+
+        .skills-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .skill-card:nth-child(1) { animation-delay: 0.2s; }
+        .skill-card:nth-child(2) { animation-delay: 0.3s; }
+        .skill-card:nth-child(3) { animation-delay: 0.4s; }
+        .skill-card:nth-child(4) { animation-delay: 0.5s; }
+        .skill-card:nth-child(5) { animation-delay: 0.6s; }
+        .skill-card:nth-child(6) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(240, 147, 251, 0.4);
+            border-color: rgba(240, 147, 251, 0.4);
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .skill-card:hover .skill-icon {
+            animation: spin 0.6s ease;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .skill-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .skill-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Progress Bar */
+        .progress {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            height: 12px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: width 1.5s ease;
+            box-shadow: 0 0 20px rgba(240, 147, 251, 0.6);
+        }
+
+        .progress span::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .percentage {
+            position: absolute;
+            right: 10px;
+            top: -30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #f093fb;
+        }
+
+        /* Category Headers */
+        .category {
+            max-width: 1200px;
+            margin: 4rem auto 2rem;
+            text-align: center;
+        }
+
+        .category h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .category h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f093fb, #f5576c, transparent);
+            border-radius: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sub-header h1 {
+                font-size: 3rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .skill-card {
+                padding: 2rem;
+            }
+
+            .category h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sub-header {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .sub-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .skill-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bgAnimation"></div>
+    <header class="header">
+        <nav class="navbar">
+            <h2 class="logo">Souvik<span>Dev</span></h2>
+            <ul class="nav-links">
+                <li><a href="index.html" class="contact-btn">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="contect.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <header class="sub-header">
+        <h1>My Skills</h1>
+        <p>Technologies & tools I work with 💻</p>
+    </header>
+
+    <section class="skills-section">
+        <div class="category">
+            <h2>Frontend Development</h2>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🎨</div>
+                <h3>HTML & CSS</h3>
+                <p>Responsive layouts, Flexbox, Grid, animations & modern CSS techniques</p>
+                <div class="progress">
+                    <span style="width: 0%" data-width="90%"></span>
+                    <span class="percentage">90%</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <h3>JavaScript</h3>
+                <p>Interactive web apps, ES6+, DOM manipulation & logic building</p>
+                <div class="progress">
+                    <span style="width: 0%" data-width="85%"></span>
+                    <span class="percentage">85%</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">⚛️</div>
+                <h3>React</h3>
+                <p>SPA development, component architecture, hooks & state management</p>
+                <div class="progress">
+                    <span style="width: 0%" data-width="80%"></span>
+                    <span class="percentage">80%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Design & Tools</h2>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🎯</div>
+                <h3>UI/UX Design</h3>
+                <p>Designing clean, user-friendly interfaces with modern aesthetics</p>
+                <div class="progress">
+                    <span style="width: 0%" data-width="75%"></span>
+                    <span class="percentage">75%</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">🔧</div>
+                <h3>Git & GitHub</h3>
+                <p>Version control, collaboration & project management</p>
+                <div class="progress">
+                    <span style="width: 0%" data-width="82%"></span>
+                    <span class="percentage">82%</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">🚀</div>
+                <h3>Performance</h3>
+                <p>Optimization, accessibility & responsive design best practices</p>
+                <div class="progress">
+                    <span style="width: 0%" data-width="78%"></span>
+                    <span class="percentage">78%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create animated background particles
+        const bgAnimation = document.getElementById('bgAnimation');
+        for (let i = 0; i < 12; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 80 + 40 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+            bgAnimation.appendChild(particle);
+        }
+
+        // Animate progress bars when they come into view
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBar = entry.target.querySelector('.progress span');
+                    const targetWidth = progressBar.getAttribute('data-width');
+                    setTimeout(() => {
+                        progressBar.style.width = targetWidth;
+                    }, 200);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

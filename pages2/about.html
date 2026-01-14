@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>About | Souvik Khilari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-100px) translateX(50px) rotate(90deg); }
+            50% { transform: translateY(-50px) translateX(-50px) rotate(180deg); }
+            75% { transform: translateY(-150px) translateX(100px) rotate(270deg); }
+        }
+
+        /* Header */
+        .sub-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 8rem 2rem 3rem;
+            overflow: hidden;
+        }
+
+        .sub-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(240, 147, 251, 0.3), transparent);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .sub-header h1 {
+            position: relative;
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideUp 0.8s ease;
+            letter-spacing: 2px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about-section {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 2rem 6rem;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+            animation: fadeIn 1s ease 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .about-img {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0.6;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .about-img img {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .about-info {
+            animation: slideRight 1s ease 0.5s backwards;
+        }
+
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .about-info h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .about-info p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .about-info p::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            width: 4px;
+            height: calc(100% - 1.4rem);
+            background: linear-gradient(180deg, #f093fb, #f5576c);
+            border-radius: 10px;
+            opacity: 0;
+            animation: slideInLine 0.5s ease forwards;
+        }
+
+        .about-info p:nth-child(2)::before {
+            animation-delay: 0.8s;
+        }
+
+        .about-info p:nth-child(3)::before {
+            animation-delay: 1s;
+        }
+
+        .about-info p:nth-child(4)::before {
+            animation-delay: 1.2s;
+        }
+
+        @keyframes slideInLine {
+            from {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        /* Stats Section */
+        .stats-container {
+            max-width: 1100px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.6s; }
+        .stat-card:nth-child(2) { animation-delay: 0.8s; }
+        .stat-card:nth-child(3) { animation-delay: 1s; }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px rgba(240, 147, 251, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .sub-header h1 {
+                font-size: 3rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 3rem 2rem;
+            }
+
+            .about-img img {
+                width: 240px;
+                height: 240px;
+            }
+
+            .about-info p {
+                text-align: left;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sub-header {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .sub-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-container {
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+
+            .about-info h2 {
+                font-size: 2rem;
+            }
+
+            .about-info p {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bgAnimation"></div>
+    <header class="header">
+        <nav class="navbar">
+            <h2 class="logo">Souvik<span>Dev</span></h2>
+            <ul class="nav-links">
+                <li><a href="index.html" class="contact-btn">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="contect.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <header class="sub-header">
+        <h1>About Me</h1>
+    </header>
+
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-img">
+                <img src="WhatsApp Image 2025-06-18 at 16.07.12_800fb87e.jpg" alt="Souvik Profile">
+            </div>
+
+            <div class="about-info">
+                <h2>Hey! I'm Souvik 👋</h2>
+                <p>I'm a passionate web developer who loves building beautiful, responsive, modern websites.</p>
+                <p>Whether it's frontend magic or backend logic — I enjoy the entire process of bringing ideas to life.</p>
+                <p>When I'm not coding, you'll find me experimenting with new tech or sipping coffee like it's my superpower ☕⚡.</p>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create animated background particles
+        const bgAnimation = document.getElementById('bgAnimation');
+        for (let i = 0; i < 12; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 80 + 40 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+            bgAnimation.appendChild(particle);
+        }
+    </script>
+</body>
+</html>

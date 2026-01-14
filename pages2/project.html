@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Projects | Souvik Khilari</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-100px) translateX(50px) rotate(90deg); }
+            50% { transform: translateY(-50px) translateX(-50px) rotate(180deg); }
+            75% { transform: translateY(-150px) translateX(100px) rotate(270deg); }
+        }
+
+        /* Header */
+        .sub-header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 8rem 2rem 3rem;
+            overflow: hidden;
+        }
+
+        .sub-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(240, 147, 251, 0.3), transparent);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .sub-header h1 {
+            position: relative;
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideUp 0.8s ease;
+            letter-spacing: 2px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sub-header p {
+            position: relative;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            animation: fadeIn 1s ease 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Projects Section */
+        .projects-section {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 2rem 6rem;
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.2s; }
+        .project-card:nth-child(2) { animation-delay: 0.3s; }
+        .project-card:nth-child(3) { animation-delay: 0.4s; }
+        .project-card:nth-child(4) { animation-delay: 0.5s; }
+        .project-card:nth-child(5) { animation-delay: 0.6s; }
+        .project-card:nth-child(6) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.2), rgba(245, 87, 108, 0.2));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(240, 147, 251, 0.4);
+            border-color: rgba(240, 147, 251, 0.5);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-image {
+            position: relative;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .project-icon {
+            font-size: 5rem;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card:hover .project-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.3), rgba(245, 87, 108, 0.3));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover .project-image::after {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(240, 147, 251, 0.2);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(240, 147, 251, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(240, 147, 251, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.9rem 1.5rem;
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-btn:hover::before {
+            left: 100%;
+        }
+
+        .project-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(240, 147, 251, 0.5);
+        }
+
+        .project-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+        }
+
+        .project-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Filter Buttons */
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease 0.5s backwards;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.8rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sub-header h1 {
+                font-size: 3rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .project-buttons {
+                flex-direction: column;
+            }
+
+            .filter-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sub-header {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .sub-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .project-image {
+                height: 180px;
+            }
+
+            .project-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation" id="bgAnimation"></div>
+    <header class="header">
+        <nav class="navbar">
+            <h2 class="logo">Souvik<span>Dev</span></h2>
+            <ul class="nav-links">
+                <li><a href="index.html" class="contact-btn">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="contect.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <header class="sub-header">
+        <h1>My Projects</h1>
+        <p>Building digital experiences that matter 🚀</p>
+    </header>
+
+    <section class="projects-section">
+        <div class="filter-container">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Web Apps</button>
+            <button class="filter-btn">Frontend</button>
+            <button class="filter-btn">Full Stack</button>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card" data-category="full-stack">
+                <div class="project-image">
+                    <div class="project-icon">🚀</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>Full-featured online store with shopping cart, payment integration, order management & admin dashboard.</p>
+                    <div class="project-buttons">
+                        <a href="#" class="project-btn">Live Demo</a>
+                        <a href="#" class="project-btn secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web-apps">
+                <div class="project-image">
+                    <div class="project-icon">📱</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Firebase</span>
+                        <span class="tag">Socket.io</span>
+                    </div>
+                    <h3>Social Media App</h3>
+                    <p>Real-time messaging platform with user profiles, post sharing, likes, comments & responsive UI design.</p>
+                    <div class="project-buttons">
+                        <a href="#" class="project-btn">Live Demo</a>
+                        <a href="#" class="project-btn secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="frontend">
+                <div class="project-image">
+                    <div class="project-icon">🎨</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <h3>Portfolio Website</h3>
+                    <p>Modern portfolio with smooth animations, creative layout, interactive elements & fully responsive design.</p>
+                    <div class="project-buttons">
+                        <a href="#" class="project-btn">Live Demo</a>
+                        <a href="#" class="project-btn secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web-apps">
+                <div class="project-image">
+                    <div class="project-icon">☁️</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">API</span>
+                        <span class="tag">Charts</span>
+                    </div>
+                    <h3>Weather Dashboard</h3>
+                    <p>Interactive weather app with real-time data, 7-day forecast, location search & beautiful data visualizations.</p>
+                    <div class="project-buttons">
+                        <a href="#" class="project-btn">Live Demo</a>
+                        <a href="#" class="project-btn secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="frontend">
+                <div class="project-image">
+                    <div class="project-icon">📝</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">LocalStorage</span>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                    <h3>Task Management App</h3>
+                    <p>Clean todo app with drag-and-drop, categories, priority levels, filters & local storage persistence.</p>
+                    <div class="project-buttons">
+                        <a href="#" class="project-btn">Live Demo</a>
+                        <a href="#" class="project-btn secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web-apps">
+                <div class="project-image">
+                    <div class="project-icon">🎵</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Spotify API</span>
+                        <span class="tag">Redux</span>
+                    </div>
+                    <h3>Music Player</h3>
+                    <p>Sleek music streaming app with playlist creation, search functionality, audio controls & personalized recommendations.</p>
+                    <div class="project-buttons">
+                        <a href="#" class="project-btn">Live Demo</a>
+                        <a href="#" class="project-btn secondary">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create animated background particles
+        const bgAnimation = document.getElementById('bgAnimation');
+        for (let i = 0; i < 12; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 80 + 40 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+            bgAnimation.appendChild(particle);
+        }
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.textContent.toLowerCase().replace(' ', '-');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.dataset.category === filterValue) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.6s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
